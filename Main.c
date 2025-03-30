@@ -77,7 +77,7 @@ void findServerInData(const char *data) {
                 }
             }
             if (serverCode[3] == 'X') {
-                printf("Server codeshort: %s\n", serverCode);
+                printf("Server codeshort: %s\n", shortServerCode);
                 serverCodes[serverCodesIndex] = strdup(shortServerCode);
             } else {
                 printf("Server code: %s\n", serverCode);
