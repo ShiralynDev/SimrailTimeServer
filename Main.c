@@ -59,7 +59,7 @@ void findServerInData(const char *data) {
     while (serverObject != NULL) {
         char *pos = strstr(serverObject, "\"ServerCode\":\"");
         if (pos != NULL) {
-            char serverCode[5];
+            char serverCode[4];
             printf("Found at position: %s\n", pos);
             for (int j = 0; j < 4; j++) {
                 // 14 is size of "ServerCode":"
@@ -70,7 +70,7 @@ void findServerInData(const char *data) {
                     serverCode[j] = pos[j + 14];
                 }
             } 
-            char shortServerCode[4];
+            char shortServerCode[3];
             if (serverCode[3] == 'X') {
                 for (int j = 0; j < 3; j++) {
                     shortServerCode[j] = serverCode[j];
