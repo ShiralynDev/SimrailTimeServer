@@ -64,13 +64,25 @@ void findServerInData(const char *data) {
             for (int j = 0; j < 4; j++) {
                 // 14 is size of "ServerCode":"
                 if (pos[j + 14] == '\"') {
+                    serverCode[j] = 'X';
                     break;
                 } else {
                     serverCode[j] = pos[j + 14];
                 }
             } 
-            printf("Server code: %s\n", serverCode);
-            serverCodes[serverCodesIndex] = strdup(serverCode);
+            char shortServerCode[4];
+            if (serverCode[3] == 'X') {
+                for (int j = 0; j < 3; j++) {
+                    shortServerCode[j] = serverCode[j];
+                }
+            }
+            if (serverCode[3] == 'X') {
+                printf("Server codeshort: %s\n", serverCode);
+                serverCodes[serverCodesIndex] = strdup(shortServerCode);
+            } else {
+                printf("Server code: %s\n", serverCode);
+                serverCodes[serverCodesIndex] = strdup(serverCode);
+            }
             serverCodesIndex++;
         } else {
             printf("Code not found in the data\n");
@@ -91,7 +103,7 @@ void findServerInData(const char *data) {
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, data);
 
         char url[100] = "https://api1.aws.simrail.eu:8082/api/getTimeZone?serverCode=";
-        strncat(url, serverCodes[i], sizeof(url) - strlen(url) - 1);
+        strncat(url, serverCodes[i], strlen(serverCodes[i]));
         printf("URL: %s\n", url);
         curl_easy_setopt(curl, CURLOPT_URL, url);
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5);
