@@ -1,0 +1,6 @@
+[submodule "extern/httpserver"]
+	path = extern/httpserver
+	url = https://github.com/jeremycw/httpserver.h
+[submodule "extern/curl"]
+	path = extern/curl
+	url = https://github.com/curl/curl
