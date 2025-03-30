@@ -69,14 +69,14 @@ void findServerInData(const char *data) {
                 } else {
                     serverCode[j] = pos[j + 14];
                 }
-                serverCode[5] = '\0';
+                serverCode[4] = '\0';
             } 
             char shortServerCode[4];
             if (serverCode[3] == 'X') {
                 for (int j = 0; j < 3; j++) {
                     shortServerCode[j] = serverCode[j];
                 }
-                shortServerCode[4] = '\0';
+                shortServerCode[3] = '\0';
             }
             if (serverCode[3] == 'X') {
                 printf("Server codeshort: %s\n", shortServerCode);
