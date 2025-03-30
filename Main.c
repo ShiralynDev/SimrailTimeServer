@@ -82,8 +82,14 @@ void findServerInData(const char *data) {
                 printf("Server codeshort: %s\n", shortServerCode);
                 serverCodes[serverCodesIndex] = strdup(shortServerCode);
             } else {
-                printf("Server code: %s\n", serverCode);
-                serverCodes[serverCodesIndex] = strdup(serverCode);
+                if (serverCode[2] == 't' && serverCode[3] == '4') { // replace with good code instead of this.
+                    char longServerCode[] = "int44";
+                    printf("Server code: %s\n", longServerCode);
+                    serverCodes[serverCodesIndex] = strdup(longServerCode);
+                } else {
+                    printf("Server code: %s\n", serverCode);
+                    serverCodes[serverCodesIndex] = strdup(serverCode);
+                }
             }
             serverCodesIndex++;
         } else {
