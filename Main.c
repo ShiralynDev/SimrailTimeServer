@@ -64,7 +64,6 @@ void findServerInData(const char *data) {
             for (int j = 0; j < 4; j++) {
                 // 14 is size of "ServerCode":"
                 if (pos[j + 14] == '\"') {
-                    serverCode[j] = '\0';
                     break;
                 } else {
                     serverCode[j] = pos[j + 14];
