@@ -64,38 +64,19 @@ void findServerInData(const char *data) {
     while (serverObject != NULL) {
         char *pos = strstr(serverObject, "\"ServerCode\":\"");
         if (pos != NULL) {
-            char serverCode[5];
+            char serverCode[10];
             printf("Found at position: %s\n", pos);
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 10; j++) {
                 // 14 is size of "ServerCode":"
                 if (pos[j + 14] == '\"') {
-                    serverCode[j] = 'X';
+                    serverCode[j] = '\0';
                     break;
                 } else {
                     serverCode[j] = pos[j + 14];
                 }
-                serverCode[4] = '\0';
             } 
-            char shortServerCode[4];
-            if (serverCode[3] == 'X') {
-                for (int j = 0; j < 3; j++) {
-                    shortServerCode[j] = serverCode[j];
-                }
-                shortServerCode[3] = '\0';
-            }
-            if (serverCode[3] == 'X') {
-                printf("Server codeshort: %s\n", shortServerCode);
-                serverCodes[serverCodesIndex] = strdup(shortServerCode);
-            } else {
-                if (serverCode[2] == 't' && serverCode[3] == '4') { // replace with good code instead of this.
-                    char longServerCode[] = "int44";
-                    printf("Server code: %s\n", longServerCode);
-                    serverCodes[serverCodesIndex] = strdup(longServerCode);
-                } else {
-                    printf("Server code: %s\n", serverCode);
-                    serverCodes[serverCodesIndex] = strdup(serverCode);
-                }
-            }
+            printf("Server code: %s\n", serverCode);
+            serverCodes[serverCodesIndex] = strdup(serverCode);
             serverCodesIndex++;
         } else {
             printf("Code not found in the data\n");
