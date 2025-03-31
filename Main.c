@@ -22,7 +22,8 @@ void handle_request(struct http_request_s* request) {
                 responseBody[responseBodyIndex] = serverTimeoffset[i][j];
                 responseBodyIndex++;
             }
-            responseBody[responseBodyIndex] = '\n';
+            if (i < (sizeof(serverTimeoffset) / sizeof(serverTimeoffset[0]) - 1))
+                responseBody[responseBodyIndex] = '\n';
             responseBodyIndex++;
         }
     }
@@ -35,7 +36,7 @@ void handle_request(struct http_request_s* request) {
     http_response_header(response, "Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     http_response_header(response, "Access-Control-Allow-Headers", "Content-Type");
     http_response_header(response, "Content-Type", "text/plain"); // For some reason my browser still downloads it as a file
-    http_response_body(response, responseBody, sizeof(responseBody) - 1);
+    http_response_body(response, responseBody, responseBodyIndex);
     http_respond(request, response);
 }
 
